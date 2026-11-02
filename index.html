@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101820">
+<title>HMA R-33</title>
+<style>
+* { box-sizing: border-box; }
+body {
+margin: 0; min-height: 100vh; padding: 24px;
+display: flex; align-items: center; justify-content: center;
+font-family: Arial, sans-serif; background: #101820; color: #fff;
+}
+main { width: 100%; max-width: 520px; text-align: center; }
+h1 { margin-bottom: 12px; font-size: clamp(28px, 7vw, 42px); }
+p { line-height: 1.6; color: #d4dbe2; }
+.ar-button {
+display: block; width: 100%; margin: 24px 0 12px; padding: 16px 20px;
+border: 0; border-radius: 12px; background: #f0c66e; color: #101820;
+font-size: 17px; font-weight: bold; text-decoration: none; cursor: pointer;
+}
+.note { margin-top: 20px; font-size: 14px; color: #aebbc7; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+<h1>HMA R-33</h1>
+<p>
+Für iPhone:
+1. Tippe auf START und im folgenden Aufruf auf "3D-Objekt anzeigen".
+2. Wenn das Objekt als Bild erscheint, tippe auf den gestrichelten Würfel oben rechts.
+3. Bewege das Handy über dem Boden an der Stelle, wo das Objekt platziert werden soll.
+4. Modell-Maßstab 1:1, richte das Handy auf das Objekt und entferne dich davon, bis es im Display gut zu sehen ist.
+</p>
+
+<!-- iPhone / iPad: bestehende Apple-AR-Quick-Look-Version -->
+<section id="ios-option" hidden>
+<a class="ar-button" rel="ar" href="./models/model.usdz">
+START
+</a>
+<p class="note">
+Objekt skalieren: Mit zwei Fingern auf dem Display (die Größe in % wird angezeigt).
+Objekt bewegen: Auf Objekt tippen, halten und verschieben.
+</p>
+</section>
+
+<!-- Android: bestehende WebXR-Version -->
+<section id="android-option" hidden>
+<a class="ar-button" href="./android.html">
+START
+</a>
+<p class="note">
+HMA R-33
+</p>
+</section>
+
+<!-- Andere Geräte: beide Möglichkeiten anbieten -->
+<section id="other-option" hidden>
+<p>Wähle die passende AR-Version für dein Gerät:</p>
+<a class="ar-button" rel="ar" href="./models/model.usdz">
+iPhone / iPad – AR starten
+</a>
+<a class="ar-button" href="./android.html">
+Android – AR starten
+</a>
+</section>
+
+<noscript>
+<p>Bitte aktiviere JavaScript oder verwende einen der direkten Links:</p>
+<a class="ar-button" rel="ar" href="./models/model.usdz">
+iPhone / iPad – AR starten
+</a>
+<a class="ar-button" href="./android.html">Android – AR starten</a>
+</noscript>
+</main>
+
+<script>
+(() => {
+const ua = navigator.userAgent || "";
+
+// iPadOS kann sich als Mac ausgeben.
+const isIPadOS =
+navigator.platform === "MacIntel" &&
+navigator.maxTouchPoints > 1;
+
+const isIOS =
+/iPhone|iPad|iPod/i.test(ua) || isIPadOS;
+
+const isAndroid = /Android/i.test(ua);
+
+if (isIOS) {
+document.getElementById("ios-option").hidden = false;
+} else if (isAndroid) {
+document.getElementById("android-option").hidden = false;
+} else {
+document.getElementById("other-option").hidden = false;
+}
+})();
+</script>
+</body>
+</html>
